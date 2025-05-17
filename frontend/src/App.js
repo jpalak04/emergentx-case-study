@@ -252,7 +252,7 @@ const ProcessSection = () => {
           
           <div className="rounded-xl overflow-hidden mb-6 shadow-xl">
             <img 
-              src="https://images.unsplash.com/photo-1743385779347-1549dabf1320" 
+              src="https://img.freepik.com/free-vector/flow-diagram-infographic_23-2148588821.jpg" 
               alt="EmergentX Process Flow" 
               className="w-full h-auto animate-slide-in-right"
             />
