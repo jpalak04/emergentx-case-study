@@ -21,4 +21,5 @@ It started as a Notion document, but I wanted to explore whether Emergent could 
 I wanted to test Emergent’s potential, to see if it could host a product idea, not just power it. This was an experiment in platform as pitch.
 
 View the live case study here → https://emergentx-case-study-g5dk.vercel.app/
+
 View the GitHub repo → https://github.com/jpalak04/emergentx-case-study
