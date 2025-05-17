@@ -37,10 +37,13 @@
 /* Animation classes */
 .animate-fade-in {
   animation: fadeIn 0.8s ease-in forwards;
+  opacity: 0;
 }
 
 .animate-slide-up {
   animation: slideUp 0.8s ease-out forwards;
+  opacity: 0;
+  transform: translateY(20px);
 }
 
 @keyframes fadeIn {
@@ -63,7 +66,7 @@
 
 /* Smooth section transitions */
 section {
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
 }
 
 /* Improved focus states */
@@ -77,17 +80,47 @@ textarea:focus {
 
 /* Improved spacing */
 section {
-  padding-top: 6rem;
-  padding-bottom: 6rem;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
 }
 
-/* Mobile menu */
-.mobile-menu {
-  display: none;
+/* Additional animations */
+.hover-lift {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Gradient background variations */
+.bg-gradient-accent {
+  background: linear-gradient(135deg, #3c78d8 0%, #6d28d9 100%);
+}
+
+/* Mobile optimizations */
 @media (max-width: 768px) {
-  .mobile-menu {
-    display: block;
+  section {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
   }
+  
+  h1 {
+    font-size: 2.5rem !important;
+  }
+  
+  h2 {
+    font-size: 2rem !important;
+  }
+}
+
+/* Subtle scroll reveal */
+.reveal {
+  opacity: 0;
+  transition: all 0.8s ease;
+}
+
+.reveal.active {
+  opacity: 1;
 }
