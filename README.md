@@ -1,29 +1,24 @@
-# EmergentX – Bridging the Prompt Gap
+# Bridging the Prompt Gap – EmergentX Case Study
 
-A product case study built **on** Emergent, **for** Emergent.  
-This project explores how onboarding can improve with better prompt scaffolding, clearer plugin recommendations, and real user insights.
+This is a product case study built inside Emergent, using Emergent, to reflect on its onboarding experience and prompt tooling.
 
-## 🔍 About
-EmergentX is a lightweight, embedded layer that helps users move from vague ideas → structured prompts → relevant plugin suggestions.  
-This case study features stories from two real users (Aanshi, 12 and Riya, 23), comparing how new builders interact with AI tools like Emergent.
+It started as a Notion document, but I wanted to explore whether Emergent could tell its own story — not just build apps, but explain *why* those apps matter.
 
-## 🧠 Highlights
-- Real-world testing with creative and non-technical users
-- Rebuilt from Notion into Emergent to test platform capabilities
-- Visual proposal of the prompt-to-app journey
-- Ideas for creators, commerce, and team workflows
-- Involvement of vibe coders and the community
+### What’s Inside
+- A walkthrough of common prompt challenges faced by new users
+- Real user stories (Aanshi, age 12 & Riya, a marketing student)
+- A lightweight proposal: EmergentX – a native prompt assistant
+- Insights into how guided prompting could unlock creative use cases
+- Reflections on how this compares to tools like Cursor and Firebase Studio
 
+### Built With
+- Emergent platform (no custom backend)
+- React frontend (auto-generated + custom prompt refinements)
+- Tailwind CSS
+- Hosted on Vercel
 
-## 📁 Structure
-- `frontend/` – React-based frontend UI
-- `backend/` – Static backend shell (not active)
-- `scripts/` – Build and deployment helpers
+### Why This Exists
+I wanted to test Emergent’s potential, to see if it could host a product idea, not just power it. This was an experiment in platform as pitch.
 
-## 🤝 Connect
-Got feedback? Questions?  
-I'm open to chatting more about building for creative tools, onboarding systems, or Emergent itself.
-
----
-
-© 2025 | Case study by Palak Jain
+View the live case study here → https://emergentx-case-study-g5dk.vercel.app/
+View the GitHub repo → https://github.com/jpalak04/emergentx-case-study
