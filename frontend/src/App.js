@@ -528,7 +528,7 @@ const JoinSection = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-10">Why I Want to Join This Journey</h2>
           
           <p className="text-xl text-gray-300 mb-12 leading-relaxed">
-            I'm not trying to be extraordinary. But I care deeply about real user problems, especially for people like Aanshi and Riya. I want to build tools that make tech more human — and I'd love to keep doing that with the Emergent team.
+            Not extraordinary. But obsessed with improving the ordinary.
           </p>
           
           <a 
