@@ -252,13 +252,16 @@ const ProcessSection = () => {
           
           <div className="rounded-xl overflow-hidden mb-6 shadow-xl">
             <img 
-              src="https://i.imgur.com/QBmtwO0.png" 
+              src="https://images.unsplash.com/photo-1614624532983-4ce03382d63d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80" 
               alt="EmergentX Process Flow" 
               className="w-full h-auto animate-slide-in-right"
             />
           </div>
-          <div className="text-center text-sm text-gray-400 mb-10">
-            The EmergentX journey: turning raw ideas into functional apps.
+          <div className="text-center mb-10">
+            <p className="text-sm text-gray-400 mb-2">The EmergentX journey: turning raw ideas into functional apps.</p>
+            <p className="text-xs text-gray-500">
+              <i>The diagram shows a horizontal workflow: Raw Idea → Clarify Intent → Structure Prompts → Recommend Plugins → Functional App</i>
+            </p>
           </div>
         </div>
         
