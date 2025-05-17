@@ -46,6 +46,12 @@
   transform: translateY(20px);
 }
 
+.animate-slide-in-right {
+  animation: slideInRight 1s ease-out forwards;
+  opacity: 0;
+  transform: translateX(40px);
+}
+
 @keyframes fadeIn {
   0% { opacity: 0; }
   100% { opacity: 1; }
@@ -54,6 +60,11 @@
 @keyframes slideUp {
   0% { transform: translateY(40px); opacity: 0; }
   100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideInRight {
+  0% { transform: translateX(40px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
 }
 
 /* Additional utility classes */
@@ -99,6 +110,11 @@ section {
   background: linear-gradient(135deg, #3c78d8 0%, #6d28d9 100%);
 }
 
+/* Shadow effects */
+.shadow-glow {
+  box-shadow: 0 0 25px rgba(60, 120, 216, 0.4);
+}
+
 /* Mobile optimizations */
 @media (max-width: 768px) {
   section {
@@ -123,4 +139,26 @@ section {
 
 .reveal.active {
   opacity: 1;
+}
+
+/* Mobile responsiveness for tables */
+@media (max-width: 640px) {
+  table {
+    font-size: 0.875rem;
+  }
+  
+  th, td {
+    padding: 0.75rem !important;
+  }
+}
+
+/* Back to top button animation */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0px); }
+}
+
+.float {
+  animation: float 2s ease-in-out infinite;
 }

@@ -41,10 +41,40 @@ const Navbar = ({ scrollToSection }) => {
   );
 };
 
+// Back to Top Button
+const BackToTopButton = ({ scrollToSection }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  
+  useEffect(() => {
+    const toggleVisibility = () => {
+      if (window.pageYOffset > 500) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+    
+    window.addEventListener('scroll', toggleVisibility);
+    return () => window.removeEventListener('scroll', toggleVisibility);
+  }, []);
+  
+  return (
+    <button 
+      onClick={() => scrollToSection('hero')}
+      className={`fixed bottom-8 right-8 bg-emergent-accent/90 hover:bg-emergent-accent p-3 rounded-full shadow-lg z-40 transition-all duration-300 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}
+      aria-label="Back to top"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+      </svg>
+    </button>
+  );
+};
+
 // Hero Section
 const HeroSection = ({ scrollToSection }) => {
   return (
-    <section className="min-h-screen flex items-center justify-center bg-emergent-dark text-white relative overflow-hidden py-20">
+    <section id="hero" className="min-h-screen flex items-center justify-center bg-emergent-dark text-white relative overflow-hidden py-20">
       <div className="absolute inset-0 opacity-20">
         <img 
           src="https://images.unsplash.com/photo-1523961131990-5ea7c61b2107" 
@@ -125,7 +155,7 @@ const UserInsightSection = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">User Insight: Aanshi (12) & Riya (23)</h2>
           
           {/* Aanshi's Story */}
-          <div className="bg-gradient-to-r from-emergent-darker to-emergent-dark p-10 rounded-xl border border-gray-800 mb-12 shadow-lg">
+          <div className="bg-gradient-to-r from-emergent-darker to-emergent-dark p-10 rounded-xl border border-gray-800 mb-8 shadow-lg">
             <h3 className="text-2xl font-bold mb-6 text-emergent-accent">Aanshi — The Aspiring Artist</h3>
             
             <p className="text-gray-300 mb-8 leading-relaxed text-lg">
@@ -159,8 +189,15 @@ const UserInsightSection = () => {
             </ul>
           </div>
           
+          {/* Divider */}
+          <div className="flex items-center justify-center my-8">
+            <div className="flex-grow h-px bg-gray-700 max-w-xs mx-auto"></div>
+            <div className="mx-4 text-gray-500">Different User, Similar Challenges</div>
+            <div className="flex-grow h-px bg-gray-700 max-w-xs mx-auto"></div>
+          </div>
+          
           {/* Riya's Story */}
-          <div className="bg-gradient-to-r from-emergent-dark to-emergent-darker p-10 rounded-xl border border-gray-800 mb-12 shadow-lg">
+          <div className="bg-gradient-to-r from-emergent-dark/80 to-emergent-secondary/10 p-10 rounded-xl border border-gray-800 mb-12 shadow-lg">
             <h3 className="text-2xl font-bold mb-6 text-emergent-accent">Riya — The Marketing Student</h3>
             
             <p className="text-gray-300 mb-8 leading-relaxed text-lg">
@@ -215,13 +252,13 @@ const ProcessSection = () => {
           
           <div className="rounded-xl overflow-hidden mb-6 shadow-xl">
             <img 
-              src="https://cdn.pixabay.com/photo/2017/06/21/11/22/process-flow-2426930_1280.jpg" 
+              src="https://images.unsplash.com/photo-1743385779347-1549dabf1320" 
               alt="EmergentX Process Flow" 
-              className="w-full h-auto"
+              className="w-full h-auto animate-slide-in-right"
             />
           </div>
           <div className="text-center text-sm text-gray-400 mb-10">
-            The journey from vague idea to functional app — simplified by EmergentX.
+            The EmergentX journey: turning raw ideas into functional apps.
           </div>
         </div>
         
@@ -263,7 +300,7 @@ const ProposalSection = () => {
         
         <div className="max-w-4xl mx-auto mb-12">
           <div className="grid md:grid-cols-2 gap-6 mb-10">
-            <div className="bg-emergent-darker p-8 rounded-xl border border-gray-800">
+            <div className="bg-emergent-darker p-8 rounded-xl border border-gray-800 shadow-lg">
               <h3 className="text-xl font-bold mb-4 text-center text-emergent-accent">Notion Page</h3>
               <ul className="space-y-4">
                 <li className="flex items-start">
@@ -281,7 +318,7 @@ const ProposalSection = () => {
               </ul>
             </div>
             
-            <div className="bg-emergent-darker p-8 rounded-xl border border-gray-800">
+            <div className="bg-emergent-darker p-8 rounded-xl border border-gray-800 shadow-lg">
               <h3 className="text-xl font-bold mb-4 text-center text-emergent-accent">Emergent Build</h3>
               <ul className="space-y-4">
                 <li className="flex items-start">
@@ -388,32 +425,90 @@ const CommunitySection = () => {
   );
 };
 
-// Impact Section
+// Impact Section with CountUp animation
 const ImpactSection = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+  
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+    
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+    
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+  
+  // CountUp animation component
+  const CountUp = ({ end, duration = 2000, suffix = "" }) => {
+    const [count, setCount] = useState(0);
+    
+    useEffect(() => {
+      if (!isVisible) return;
+      
+      let startTime;
+      let animationFrame;
+      
+      const animate = (timestamp) => {
+        if (!startTime) startTime = timestamp;
+        const progress = timestamp - startTime;
+        const percentage = Math.min(progress / duration, 1);
+        
+        setCount(Math.floor(percentage * end));
+        
+        if (percentage < 1) {
+          animationFrame = requestAnimationFrame(animate);
+        }
+      };
+      
+      animationFrame = requestAnimationFrame(animate);
+      
+      return () => cancelAnimationFrame(animationFrame);
+    }, [end, duration, isVisible]);
+    
+    return <span>{count}{suffix}</span>;
+  };
+  
   return (
     <section id="impact" className="py-20 bg-emergent-darker text-white">
-      <div className="container mx-auto px-4">
+      <div ref={sectionRef} className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold mb-16 text-center">Impact</h2>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
-          <div className="bg-gradient-to-br from-emergent-accent to-emergent-secondary p-8 rounded-xl text-center transform transition duration-300 hover:scale-105 shadow-lg">
-            <div className="text-5xl font-bold mb-4">↑40%</div>
-            <p className="text-white font-medium">app success rate</p>
+          <div className="bg-gradient-to-br from-emergent-accent to-emergent-secondary p-8 rounded-xl text-center transform transition-all duration-300 hover:scale-110 hover:shadow-glow shadow-lg group">
+            <div className="text-5xl font-bold mb-4">
+              {isVisible ? <span>↑<CountUp end={40} suffix="%" /></span> : "↑0%"}
+            </div>
+            <p className="text-white font-medium group-hover:font-bold transition-all">app success rate</p>
           </div>
           
-          <div className="bg-gradient-to-br from-emergent-accent to-emergent-secondary p-8 rounded-xl text-center transform transition duration-300 hover:scale-105 shadow-lg">
-            <div className="text-5xl font-bold mb-4">↓25%</div>
-            <p className="text-white font-medium">prompt dropout</p>
+          <div className="bg-gradient-to-br from-emergent-accent to-emergent-secondary p-8 rounded-xl text-center transform transition-all duration-300 hover:scale-110 hover:shadow-glow shadow-lg group">
+            <div className="text-5xl font-bold mb-4">
+              {isVisible ? <span>↓<CountUp end={25} suffix="%" /></span> : "↓0%"}
+            </div>
+            <p className="text-white font-medium group-hover:font-bold transition-all">prompt dropout</p>
           </div>
           
-          <div className="bg-gradient-to-br from-emergent-accent to-emergent-secondary p-8 rounded-xl text-center transform transition duration-300 hover:scale-105 shadow-lg">
+          <div className="bg-gradient-to-br from-emergent-accent to-emergent-secondary p-8 rounded-xl text-center transform transition-all duration-300 hover:scale-110 hover:shadow-glow shadow-lg group">
             <div className="text-5xl font-bold mb-4">↑</div>
-            <p className="text-white font-medium">Plugin adoption</p>
+            <p className="text-white font-medium group-hover:font-bold transition-all">Plugin adoption</p>
           </div>
           
-          <div className="bg-gradient-to-br from-emergent-accent to-emergent-secondary p-8 rounded-xl text-center transform transition duration-300 hover:scale-105 shadow-lg">
+          <div className="bg-gradient-to-br from-emergent-accent to-emergent-secondary p-8 rounded-xl text-center transform transition-all duration-300 hover:scale-110 hover:shadow-glow shadow-lg group">
             <div className="text-5xl font-bold mb-4">✓</div>
-            <p className="text-white font-medium">Better outcomes for creative & young users</p>
+            <p className="text-white font-medium group-hover:font-bold transition-all">Better outcomes for creative & young users</p>
           </div>
         </div>
       </div>
@@ -489,6 +584,7 @@ const Footer = () => {
 
 function App() {
   // Create refs for each section
+  const heroRef = useRef(null);
   const overviewRef = useRef(null);
   const userInsightRef = useRef(null);
   const proposalRef = useRef(null);
@@ -501,6 +597,7 @@ function App() {
   // Function to handle scrolling to sections
   const scrollToSection = (sectionId) => {
     const sectionRefs = {
+      'hero': heroRef,
       'overview': overviewRef,
       'userInsight': userInsightRef,
       'proposal': proposalRef,
@@ -546,7 +643,11 @@ function App() {
   return (
     <div className="App bg-emergent-dark text-white">
       <Navbar scrollToSection={scrollToSection} />
-      <HeroSection scrollToSection={scrollToSection} />
+      <BackToTopButton scrollToSection={scrollToSection} />
+      
+      <div ref={heroRef}>
+        <HeroSection scrollToSection={scrollToSection} />
+      </div>
       
       <div ref={overviewRef}>
         <OverviewSection />
