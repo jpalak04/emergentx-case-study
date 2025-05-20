@@ -9,7 +9,6 @@ It started as a Notion document, but I wanted to explore whether Emergent could 
 - Real user stories (Aanshi, age 12 & Riya, a marketing student)
 - A lightweight proposal: EmergentX – a native prompt assistant
 - Insights into how guided prompting could unlock creative use cases
-- Reflections on how this compares to tools like Cursor and Firebase Studio
 
 ### Built With
 - Emergent platform (no custom backend)
